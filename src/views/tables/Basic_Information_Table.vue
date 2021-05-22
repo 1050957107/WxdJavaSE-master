@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="container">
       <div class="handle-box">
         <el-select placeholder="高级查询" class="handle-select mr10" @change="dateTypeSelectChange">
@@ -9,11 +8,10 @@
           <el-option value="3" label="按月查询"></el-option>
           <el-option value=“4” label="按年查询"></el-option>
         </el-select>
-        <el-input v-model="search_name" placeholder="请输入设备ID" class="handle-input mr10" width="100dp"></el-input>
+        <el-input v-model="search_name" placeholder="请输入设备ID" class="handle-input mr10" width="100dp" @keyup.enter.native="doFilter"></el-input>
         <el-button type="primary" icon="el-icon-search" @click="doFilter">搜索</el-button>
       </div>
       <el-table :data="tableData" border>
-<!--        <el-table-column type="selection" class="el-table"></el-table-column>-->
         <el-table-column prop="serial_number" label="序列号" class="el-table" align="center"></el-table-column>
         <el-table-column prop="device_id" label="设备ID" class="el-table" align="center"></el-table-column>
         <el-table-column prop="location_of_the_device" label="设备所在的位置" class="el-table" align="center"></el-table-column>
@@ -22,12 +20,6 @@
         <el-table-column prop="device_activation_time" label="设备激活时间" class="el-table" align="center"></el-table-column>
       </el-table>
     </div>
-<!--    <el-pagination-->
-<!--        :page-size="20"-->
-<!--        :pager-count="11"-->
-<!--        layout="prev, pager, next"-->
-<!--        :total="1000">-->
-<!--    </el-pagination>-->
   </div>
 </template>
 
