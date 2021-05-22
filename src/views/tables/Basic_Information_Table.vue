@@ -1,0 +1,111 @@
+<template>
+  <div>
+
+    <div class="container">
+      <div class="handle-box">
+        <el-select placeholder="高级查询" class="handle-select mr10" @change="dateTypeSelectChange">
+          <el-option value="1" label="按日查询"></el-option>
+          <el-option value="2" label="按周查询"></el-option>
+          <el-option value="3" label="按月查询"></el-option>
+          <el-option value=“4” label="按年查询"></el-option>
+        </el-select>
+        <el-input v-model="search_name" placeholder="请输入设备ID" class="handle-input mr10" width="100dp"></el-input>
+        <el-button type="primary" icon="el-icon-search" @click="doFilter">搜索</el-button>
+      </div>
+      <el-table :data="tableData" border>
+<!--        <el-table-column type="selection" class="el-table"></el-table-column>-->
+        <el-table-column prop="serial_number" label="序列号" class="el-table" align="center"></el-table-column>
+        <el-table-column prop="device_id" label="设备ID" class="el-table" align="center"></el-table-column>
+        <el-table-column prop="location_of_the_device" label="设备所在的位置" class="el-table" align="center"></el-table-column>
+        <el-table-column prop="device_start_date" label="设备开启日期" class="el-table" align="center"></el-table-column>
+        <el-table-column prop="device_shutdown_date" label="设备关闭日期" class="el-table" align="center"></el-table-column>
+        <el-table-column prop="device_activation_time" label="设备激活时间" class="el-table" align="center"></el-table-column>
+      </el-table>
+    </div>
+<!--    <el-pagination-->
+<!--        :page-size="20"-->
+<!--        :pager-count="11"-->
+<!--        layout="prev, pager, next"-->
+<!--        :total="1000">-->
+<!--    </el-pagination>-->
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: "BasicInformationTable",
+  data() {
+    return {
+      tableData:[],
+      search_name:''
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    doFilter:function (){
+      var fd = new FormData()
+      fd.append("mydevice_id",this.search_name)
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      axios.post('http://47.94.80.231:8080/SLKJ/data/search_get_Basic_Information_Of_Equipment_Infos',fd,config).then(v => {
+        console.log(v)
+        let data = v.data;
+        this.tableData = data.data
+      })
+    },
+    getData: function () {
+      axios.get("http://47.94.80.231:8080/SLKJ/data/get_Basic_Information_Of_Equipment_Infos").then(v => {
+        let data = v.data;
+        this.tableData = data.data
+      })
+    },
+    dateTypeSelectChange: function (val) {
+      if (val === "1") {
+        axios.get("http://47.94.80.231:8080/SLKJ/data/get_Basic_Information_Of_Equipment_Infos_day").then(v => {
+          let data=v.data;
+          this.tableData=data.data
+        })
+      } else if (val === "2") {
+        axios.get("http://47.94.80.231:8080/SLKJ/data/get_Basic_Information_Of_Equipment_Infos_week").then(v => {
+          let data=v.data;
+          this.tableData=data.data
+        })
+      } else if (val === "3") {
+        axios.get("http://47.94.80.231:8080/SLKJ/data/get_Basic_Information_Of_Equipment_Infos_month").then(v => {
+          let data=v.data;
+          this.tableData=data.data
+        })
+      } else if (val === "4") {
+        axios.get("http://47.94.80.231:8080/SLKJ/data/get_Basic_Information_Of_Equipment_Infos_year").then(v => {
+          let data=v.data;
+          this.tableData=data.data
+        })
+      }
+    },
+  }
+};
+</script>
+
+<style scoped>
+.handle-box {
+  margin-bottom: 20px;
+}
+.handle-select {
+  width: 120px;
+}
+.handle-input {
+  width: 300px;
+  display: inline-block;
+}
+.mr10 {
+  margin-right: 10px;
+}
+
+</style>
