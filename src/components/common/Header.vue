@@ -4,11 +4,9 @@
       <i v-if="!collapse" class="el-icon-s-fold"></i>
       <i v-else class="el-icon-s-unfold"></i>
     </div>
-    <div class="logo">后台管理系统</div>
-    <div class="header-user-con">
-      <div class="user-avator">
-        <img src="../../assets/images/project.png"/>
-      </div>
+      <div class="logo">后台管理系统</div>
+    <div class="header-right">
+        <img height="70" src="../../assets/images/project.png"/>
     </div>
   </div>
 </template>
@@ -16,9 +14,9 @@
 import bus from '../common/bus';
 
 export default {
-  data: function () {
+  data() {
     return {
-      collapse: false
+      collapse:false
     };
   },
   methods: {
@@ -34,38 +32,23 @@ export default {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 120px;
+  height: 100px;
   font-size: 22px;
   color: #fff;
 }
-
 .collapse-btn {
   float: left;
   padding: 0 21px;
   cursor: pointer;
   line-height: 70px;
 }
-
 .header .logo {
   float: left;
   width: 250px;
   line-height: 70px;
 }
-
-.header-user-con {
-  display: flex;
-  height: 80px;
-  align-items: center;
-}
-
-.user-avator {
-  margin-left: 0px;
-}
-
-.user-avator img {
-  display: block;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+.header-right {
+  float: right;
+  padding-right: 50px;
 }
 </style>

@@ -52,7 +52,7 @@ export default {
         //   icon: 'el-icon-pie-chart',
         //   index: 'MaintenanceInformationSheet',
         //   title: '维修信息表'
-        // }8
+        // }
       ]
     };
   },
@@ -92,4 +92,5 @@ export default {
 .sidebar > ul {
   height: 100%;
 }
+
 </style>

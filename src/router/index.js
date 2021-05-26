@@ -7,7 +7,6 @@ import GameInformationStatistics from "@/views/tables/Game_Information_Statistic
 import MaintenanceInformationSheet from "@/views/tables/Maintenance_Information_Sheet";
 import NotFound from "@/components/404";
 import Listofabnormalinformation from "@/views/tables/Exception_information_list";
-
 Vue.use(Router)  // 在vue中注入Router
 
 let router = new Router({
@@ -51,6 +50,11 @@ let router = new Router({
                         component: Listofabnormalinformation,
                         meta: { title: '异常信息明细表' }
                     }
+                    // ,{
+                    //     path: "MaintenanceInformationSheet",
+                    //     component: MaintenanceInformationSheet,
+                    //     meta: { title: '维修信息表' }
+                    // }
                 ]
             }
         ]
